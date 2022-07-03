@@ -1,6 +1,11 @@
 package engine.strategy;
 
-import java.nio.ByteBuffer;
+import engine.Globals;
+import engine.models.BufferEnum;
+import engine.utils.GLUtils;
+import org.lwjgl.opengl.GL30;
+
+import java.nio.FloatBuffer;
 
 public class RectTextureRenderingStrategy {
 
@@ -12,7 +17,7 @@ public class RectTextureRenderingStrategy {
 
     private int height;
 
-    private ByteBuffer[] something;
+    private FloatBuffer dataBuffer;
 
     public RectTextureRenderingStrategy(int x, int y, int width, int height) {
         this.x = x;
@@ -21,5 +26,15 @@ public class RectTextureRenderingStrategy {
         this.height = height;
     }
 
-
+    public void execute() {
+        float[] coordinates = {
+                (float) x / Globals.screenWidth,
+                (float) y / Globals.screenHeight,
+                (float) (x + width) / Globals.screenWidth,
+                (float) (y + height) / Globals.screenHeight
+        };
+        dataBuffer = FloatBuffer.wrap(coordinates);
+        GLUtils.prepareForObjectRendering(BufferEnum.SCENE_BUFFER);
+        GL30.glEnableVertexAttribArray();
+    }
 }

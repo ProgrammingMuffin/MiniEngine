@@ -1,7 +1,9 @@
 package engine;
 
+import engine.models.BufferEnum;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GLUtil;
 
 /**
@@ -19,5 +21,13 @@ public class Init {
         GLFW.glfwShowWindow(window);
         GL.createCapabilities();
         GLUtil.setupDebugMessageCallback();
+        initVertexBufferObjects();
+    }
+
+    private static void initVertexBufferObjects() {
+        Globals.bufferMap.put(BufferEnum.SCENE_BUFFER, GL30.glGenBuffers());
+        Globals.bufferMap.put(BufferEnum.OBJECT_BUFFER, GL30.glGenBuffers());
+        Globals.arrayMap.put(BufferEnum.SCENE_BUFFER, GL30.glGenVertexArrays());
+        Globals.arrayMap.put(BufferEnum.OBJECT_BUFFER, GL30.glGenVertexArrays());
     }
 }
