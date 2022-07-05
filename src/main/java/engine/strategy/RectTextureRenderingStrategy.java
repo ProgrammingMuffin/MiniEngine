@@ -35,6 +35,7 @@ public class RectTextureRenderingStrategy {
         };
         dataBuffer = FloatBuffer.wrap(coordinates);
         GLUtils.prepareForObjectRendering(BufferEnum.SCENE_BUFFER);
-        GL30.glEnableVertexAttribArray();
+        GL30.glEnableVertexAttribArray(0);
+        GL30.glBufferData(GL30.GL_ARRAY_BUFFER, coordinates, GL30.GL_STATIC_DRAW);
     }
 }
