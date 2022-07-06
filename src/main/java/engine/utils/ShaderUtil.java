@@ -11,10 +11,10 @@ public class ShaderUtil {
 
     public static final Map<String, ShaderProgram> shaderMap = new HashMap<>();
 
-    private static int compileAndAddShaderStage(String shaderName, File file) {
+    public static int compileAndAddShaderStage(int shaderStage, InputStream file) {
         StringBuilder source = new StringBuilder();
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
                 source.append(line);
@@ -24,14 +24,13 @@ public class ShaderUtil {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        compileShader()
+        return compileShader(shaderStage, source.toString());
     }
 
     private static int compileShader(int type, String source) {
         int shader = GL30.glCreateShader(type);
         GL30.glShaderSource(shader, source);
         GL30.glCompileShader(shader);
-        System.out.println("GL errors: " + GL30.glGetError());
         return shader;
     }
 }

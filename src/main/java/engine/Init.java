@@ -15,7 +15,7 @@ public class Init {
 
     public static void init () {
         GLFW.glfwInit();
-        window = GLFW.glfwCreateWindow(640, 480, "hello world!", GLFW.glfwGetPrimaryMonitor(), 0);
+        window = GLFW.glfwCreateWindow(Globals.screenWidth, Globals.screenHeight, "hello world!", GLFW.glfwGetPrimaryMonitor(), 0);
         GLFW.glfwDefaultWindowHints();
         GLFW.glfwMakeContextCurrent(window);
         GLFW.glfwShowWindow(window);

@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class Globals {
 
-    public static int screenWidth = 640;
+    public static int screenWidth = 100;
 
-    public static int screenHeight = 480;
+    public static int screenHeight = 100;
 
     public static Map<BufferEnum, Integer> bufferMap = new HashMap<>();
 
