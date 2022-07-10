@@ -37,11 +37,13 @@ public class ShaderProgram {
 
         public ShaderProgramBuilder addVertexShader(InputStream file) {
             this.program.setVertexShader(ShaderUtil.compileAndAddShaderStage(GL30.GL_VERTEX_SHADER, file));
+            System.out.println("vertex shader compilation error: " + GL30.glGetError());
             return this;
         }
 
         public ShaderProgramBuilder addFragmentShader(InputStream file) {
             this.program.setFragmentShader(ShaderUtil.compileAndAddShaderStage(GL30.GL_FRAGMENT_SHADER, file));
+            System.out.println("fragment shader compilation error: " + GL30.glGetError());
             return this;
         }
 

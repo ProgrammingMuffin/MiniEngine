@@ -11,5 +11,9 @@ public enum BufferEnum {
      * Consider this to be object centric.
      * Like the trees, cars, players, etc
      */
-    OBJECT_BUFFER
+    OBJECT_BUFFER,
+    /**
+     * Here's where textures chill
+     */
+    TEXTURE_BUFFER
 }
