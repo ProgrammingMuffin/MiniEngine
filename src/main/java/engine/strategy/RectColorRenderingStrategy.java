@@ -2,18 +2,17 @@ package engine.strategy;
 
 import engine.Globals;
 import engine.Renderer;
-import engine.models.BufferEnum;
-import engine.models.DrawTypeEnum;
-import engine.models.Polygon;
-import engine.models.ShaderProgram;
+import engine.models.*;
 import engine.services.GlService;
 import engine.utils.ShaderUtil;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.FloatBuffer;
 
-public class RectColorRenderingStrategy {
+@Data
+@NoArgsConstructor
+public class RectColorRenderingStrategy implements IRenderingStrategy {
 
     private int x;
 
@@ -23,14 +22,19 @@ public class RectColorRenderingStrategy {
 
     private int height;
 
-    public RectColorRenderingStrategy(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    private RGBWrapper rgb;
+
+    public RectColorRenderingStrategy(StrategyParams params) {
+        ColorRenderingStrategyParam param = params.colorStrategyParam;
+        this.x = param.x;
+        this.y = param.y;
+        this.width = param.width;
+        this.height = param.height;
+        this.rgb = param.rgb;
     }
 
-    public void execute() throws URISyntaxException {
+    @Override
+    public void execute() {
         float[] coordinates = {
                 (float) x / Globals.screenWidth, (float) y / Globals.screenHeight,
                 (float) (x + width) / Globals.screenWidth, (float) y / Globals.screenHeight,
@@ -54,6 +58,6 @@ public class RectColorRenderingStrategy {
     }
 
     private InputStream getFile(String fileName) {
-            return Renderer.class.getClassLoader().getResourceAsStream(fileName);
+        return Renderer.class.getClassLoader().getResourceAsStream(fileName);
     }
 }

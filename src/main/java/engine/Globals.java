@@ -1,5 +1,6 @@
 package engine;
 
+import engine.models.AbstractCamera;
 import engine.models.BufferEnum;
 
 import java.util.HashMap;
@@ -17,4 +18,6 @@ public class Globals {
 
     // Keys are file names. Values are OpenGL generated texture IDs
     public static Map<String, Integer> textureMap = new HashMap<>();
+
+    public static AbstractCamera camera;
 }

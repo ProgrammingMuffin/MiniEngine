@@ -39,10 +39,11 @@ public class GlService {
             Integer texId = Globals.textureMap.get(polygon.getTextureFileName());
             GL30.glActiveTexture(GL30.GL_TEXTURE0);
             GL30.glBindTexture(GL30.GL_TEXTURE_2D, texId);
-            ByteBuffer imageData = getImageBytes(polygon.getTextureFileName());
+            BufferedImage image = getImage(polygon.getTextureFileName());
+            ByteBuffer imageData = getImageBytes(image);
             GL30.glTexParameteri(GL30.GL_TEXTURE_2D, GL30.GL_TEXTURE_MIN_FILTER, GL30.GL_LINEAR);
             GL30.glTexParameteri(GL30.GL_TEXTURE_2D, GL30.GL_TEXTURE_MAG_FILTER, GL30.GL_LINEAR);
-            GL30.glTexImage2D(GL30.GL_TEXTURE_2D, 0, GL30.GL_RGBA, 959, 540,
+            GL30.glTexImage2D(GL30.GL_TEXTURE_2D, 0, GL30.GL_RGBA, image.getWidth(), image.getHeight(),
                     0, GL30.GL_RGBA, GL30.GL_UNSIGNED_BYTE, imageData.flip());
             int uniformLocation = GL30.glGetUniformLocation(program, "tex");
             GL30.glUniform1i(uniformLocation, 0);
@@ -58,16 +59,20 @@ public class GlService {
         GL30.glBindVertexArray(0);
     }
 
-    private static ByteBuffer getImageBytes(String imageFileName) {
-        int width = 959;
-        int height = 540;
+    private static BufferedImage getImage(String imageFileName) {
         BufferedImage image;
         try {
             image = ImageIO.read(Objects.requireNonNull(GlService.class.getClassLoader()
                     .getResourceAsStream(imageFileName)));
+            return image;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static ByteBuffer getImageBytes(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(width * height * 4);
         int[] rgbArray = new int[width * height];
         image.getRGB(0, 0, width, height, rgbArray, 0, width);

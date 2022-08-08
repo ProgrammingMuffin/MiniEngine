@@ -2,17 +2,13 @@ package engine.strategy;
 
 import engine.Globals;
 import engine.Renderer;
-import engine.models.BufferEnum;
-import engine.models.DrawTypeEnum;
-import engine.models.ShaderProgram;
-import engine.models.Polygon;
+import engine.models.*;
 import engine.services.GlService;
 import engine.utils.ShaderUtil;
 
 import java.io.InputStream;
-import java.net.URISyntaxException;
 
-public class RectTextureRenderingStrategy {
+public class RectTextureRenderingStrategy implements IRenderingStrategy {
 
     private int x;
 
@@ -24,15 +20,17 @@ public class RectTextureRenderingStrategy {
 
     private String image;
 
-    public RectTextureRenderingStrategy(int x, int y, int width, int height, String image) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.image = image;
+    public RectTextureRenderingStrategy(StrategyParams params) {
+        TextureRenderingStrategyParam param = params.textureStrategyParam;
+        this.x = param.x;
+        this.y = param.y;
+        this.width = param.width;
+        this.height = param.height;
+        this.image = param.image;
     }
 
-    public void execute() throws URISyntaxException {
+    @Override
+    public void execute() {
         float[] coordinates = {
                 (float) x / Globals.screenWidth, (float) y / Globals.screenHeight,
                 (float) (x + width) / Globals.screenWidth, (float) y / Globals.screenHeight,
