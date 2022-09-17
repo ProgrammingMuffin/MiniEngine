@@ -1,3 +1,14 @@
+### Mini Engine (exploratory)
+
+Mini Engine is a very tiny and lightweight OpenGL based rendering engine which can be used very flexibly and with ease.
+Mini Engine can be used for quickly writing prototypes of games where you can use your own physics and entity component system etc. It can even be used for 
+writing any OpenGL accelerated graphical programs like a picture drawing program or a terminal emulator.
+
+### How do you write prototypes?
+
+Writing prototypes is as simple as this:
+
+```java
 import engine.Init;
 import engine.models.*;
 import org.lwjgl.glfw.GLFW;
@@ -25,3 +36,18 @@ public class Application {
         }
     }
 }
+```
+
+### What does the above program look like?
+
+The above program gives the following output
+
+![MiniEngine simple program](miniengine.png)
+
+
+### Installation and Running
+
+- Install Maven (Maven 3 is recommended)
+- Install Java JRE and JDK (At least Java 11)
+- ```mvn package```
+- java -jar target/<jar>

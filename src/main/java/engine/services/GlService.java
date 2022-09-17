@@ -1,9 +1,7 @@
 package engine.services;
 
 import engine.Globals;
-import engine.models.BufferEnum;
-import engine.models.DrawTypeEnum;
-import engine.models.ShaderProgram;
+import engine.models.*;
 import engine.models.Polygon;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
@@ -18,7 +16,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static java.sql.Types.FLOAT;
+
 public class GlService {
+
+    private static final int dataCountPerColor = 3;
 
     public static void renderObject(BufferEnum bufferType, DrawTypeEnum drawType, Polygon polygon,
                                     int dataCountPerCoordinate, ShaderProgram shaderProgram) {
@@ -50,6 +52,10 @@ public class GlService {
             GL30.glEnableVertexAttribArray(GL30.glGetAttribLocation(program, "textureCoord"));
             GL30.glBufferData(GL30.GL_ARRAY_BUFFER, polygon.getTextureCoordinates(), GL30.GL_STATIC_DRAW);
             GL30.glVertexAttribPointer(GL30.glGetAttribLocation(program, "textureCoord"), 2, GL30.GL_FLOAT, false, Float.BYTES * 2, 0);
+        } else if (polygon.getRgb() != null) {
+            int uniformLocation = GL30.glGetUniformLocation(program, "colors");
+            RGBWrapper rgb = polygon.getRgb();
+            GL30.glUniform3f(uniformLocation, (float) rgb.getR() / 255, (float) rgb.getG() / 255, (float) rgb.getB() / 255);
         }
         GL30.glDrawArrays(drawType.getGlEnum(), 0, polygon.getCoordinates().length / dataCountPerCoordinate);
     }

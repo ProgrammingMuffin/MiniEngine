@@ -10,4 +10,6 @@ public class Polygon {
     private float[] textureCoordinates;
 
     private String textureFileName;
+
+    private RGBWrapper rgb;
 }

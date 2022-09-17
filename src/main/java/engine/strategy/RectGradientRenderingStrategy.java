@@ -1,31 +1,25 @@
 package engine.strategy;
 
 import engine.Globals;
-import engine.Renderer;
 import engine.models.*;
 import engine.services.GlService;
 import engine.utils.FileUtil;
 import engine.utils.ShaderUtil;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.io.InputStream;
+public class RectGradientRenderingStrategy implements IRenderingStrategy {
 
-@Data
-@NoArgsConstructor
-public class RectColorRenderingStrategy implements IRenderingStrategy {
 
     @Override
     public void execute(IRenderData renderData) {
-        if (!RenderTypeEnum.COLORED_QUAD.equals(renderData.getRenderType())) {
+        if (!RenderTypeEnum.GRADIENT_QUAD.equals(renderData.getRenderType())) {
             return;
         }
-        ColoredQuad coloredQuad = (ColoredQuad) renderData;
-        int x = coloredQuad.x;
-        int y = coloredQuad.y;
-        int width = coloredQuad.width;
-        int height = coloredQuad.height;
-        RGBWrapper rgb = coloredQuad.rgb;
+        GradientQuad gradientQuad = (GradientQuad) renderData;
+        int x = gradientQuad.x;
+        int y = gradientQuad.y;
+        int width = gradientQuad.width;
+        int height = gradientQuad.height;
+        RGBWrapper rgb = gradientQuad.rgb;
         float[] coordinates = {
                 (float) x / Globals.screenWidth, (float) y / Globals.screenHeight,
                 (float) (x + width) / Globals.screenWidth, (float) y / Globals.screenHeight,
@@ -33,14 +27,14 @@ public class RectColorRenderingStrategy implements IRenderingStrategy {
                 (float) x / Globals.screenWidth, (float) (y + height) / Globals.screenHeight
         };
         ShaderProgram shaderProgram;
-        if (ShaderUtil.shaderMap.get("2d_simple_shader") == null) {
+        if (ShaderUtil.shaderMap.get("2d_gradient_shader") == null) {
             shaderProgram = ShaderProgram.builder()
-                    .addVertexShader(FileUtil.getFile("simple_shaders/2d_simple_vertex_shader.glsl"))
-                    .addFragmentShader(FileUtil.getFile("simple_shaders/2d_simple_fragment_shader.glsl"))
+                    .addVertexShader(FileUtil.getFile("gradient_shaders/2d_gradient_vertex_shader.glsl"))
+                    .addFragmentShader(FileUtil.getFile("gradient_shaders/2d_gradient_fragment_shader.glsl"))
                     .build();
-            ShaderUtil.shaderMap.put("2d_simple_shader", shaderProgram);
+            ShaderUtil.shaderMap.put("2d_gradient_shader", shaderProgram);
         } else {
-            shaderProgram = ShaderUtil.shaderMap.get("2d_simple_shader");
+            shaderProgram = ShaderUtil.shaderMap.get("2d_gradient_shader");
         }
         Polygon polygon = new Polygon();
         polygon.setCoordinates(coordinates);

@@ -2,20 +2,20 @@ package engine.models;
 
 import engine.strategy.IRenderingStrategy;
 import engine.strategy.RectColorRenderingStrategy;
+import engine.strategy.RectGradientRenderingStrategy;
 import engine.strategy.RectTextureRenderingStrategy;
+import lombok.Getter;
 
 public enum RenderTypeEnum {
 
-    COLORED_QUAD {
-        public IRenderingStrategy getStrategy(StrategyParams params) {
-            return new RectColorRenderingStrategy(params);
-        }
-    },
-    TEXTURED_QUAD {
-        public IRenderingStrategy getStrategy(StrategyParams params) {
-            return new RectTextureRenderingStrategy(params);
-        }
-    };
+    COLORED_QUAD (new RectColorRenderingStrategy()),
+    TEXTURE_QUAD (new RectTextureRenderingStrategy()),
+    GRADIENT_QUAD (new RectGradientRenderingStrategy());
 
-    public abstract IRenderingStrategy getStrategy(StrategyParams params);
+    RenderTypeEnum(IRenderingStrategy renderingStrategy) {
+        this.renderingStrategy = renderingStrategy;
+    }
+
+    @Getter
+    private IRenderingStrategy renderingStrategy;
 }
