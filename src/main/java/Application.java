@@ -3,10 +3,12 @@ import engine.models.*;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Application {
 
     public static void main(String[] args) {
+        final AtomicBoolean running = new AtomicBoolean(true);
         System.out.println("Running game");
         Init.init();
         ArrayList<IRenderData> coloredRectangles = new ArrayList<>();
@@ -16,12 +18,20 @@ public class Application {
                 .width(250).height(150).rgb(new RGBWrapper(0, 255, 180)).build());
         coloredRectangles.add(TextureQuad.builder().x(-100).y(100)
                 .width(300).height(300).image("doge.jpg").build());
-        while (true) {
+        while (running.get()) {
+            System.out.println("doing some sort of printing right now");
             coloredRectangles.forEach(rectangle -> {
                 rectangle.getRenderType().getRenderingStrategy().execute(rectangle);
             });
             GLFW.glfwSwapBuffers(Init.window);
             GLFW.glfwPollEvents();
+            GLFW.glfwSetWindowCloseCallback(Init.window, window -> {
+                GLFW.glfwDestroyWindow(window);
+                running.set(false);
+            });
+            if (running.get() == false) {
+                break;
+            }
         }
     }
 }
