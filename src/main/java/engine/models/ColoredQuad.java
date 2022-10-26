@@ -19,4 +19,12 @@ public class ColoredQuad implements IRenderData {
     public RenderTypeEnum getRenderType() {
         return RenderTypeEnum.COLORED_QUAD;
     }
+
+    @Override
+    public Coordinates getCoordinates() {
+        return Coordinates.builder()
+                .x(x)
+                .y(y)
+                .build();
+    }
 }

@@ -23,7 +23,7 @@ public class GlService {
     private static final int dataCountPerColor = 3;
 
     public static void renderObject(BufferEnum bufferType, DrawTypeEnum drawType, Polygon polygon,
-                                    int dataCountPerCoordinate, ShaderProgram shaderProgram) {
+            int dataCountPerCoordinate, ShaderProgram shaderProgram) {
         int program = shaderProgram.getProgram();
         GL30.glLinkProgram(program);
         GL30.glUseProgram(program);
@@ -31,7 +31,8 @@ public class GlService {
         GL30.glBindVertexArray(Globals.arrayMap.get(bufferType));
         GL30.glEnableVertexAttribArray(GL30.glGetAttribLocation(program, "vertexCoord"));
         GL30.glBufferData(GL30.GL_ARRAY_BUFFER, polygon.getCoordinates(), GL30.GL_STATIC_DRAW);
-        GL30.glVertexAttribPointer(GL30.glGetAttribLocation(program, "vertexCoord"), dataCountPerCoordinate, GL30.GL_FLOAT, false,
+        GL30.glVertexAttribPointer(GL30.glGetAttribLocation(program, "vertexCoord"), dataCountPerCoordinate,
+                GL30.GL_FLOAT, false,
                 Float.BYTES * dataCountPerCoordinate, 0);
         if (polygon.getTextureCoordinates() != null && polygon.getTextureCoordinates().length > 0) {
             GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, Globals.bufferMap.get(BufferEnum.TEXTURE_BUFFER));
@@ -51,11 +52,13 @@ public class GlService {
             GL30.glUniform1i(uniformLocation, 0);
             GL30.glEnableVertexAttribArray(GL30.glGetAttribLocation(program, "textureCoord"));
             GL30.glBufferData(GL30.GL_ARRAY_BUFFER, polygon.getTextureCoordinates(), GL30.GL_STATIC_DRAW);
-            GL30.glVertexAttribPointer(GL30.glGetAttribLocation(program, "textureCoord"), 2, GL30.GL_FLOAT, false, Float.BYTES * 2, 0);
+            GL30.glVertexAttribPointer(GL30.glGetAttribLocation(program, "textureCoord"), 2, GL30.GL_FLOAT, false,
+                    Float.BYTES * 2, 0);
         } else if (polygon.getRgb() != null) {
             int uniformLocation = GL30.glGetUniformLocation(program, "colors");
             RGBWrapper rgb = polygon.getRgb();
-            GL30.glUniform3f(uniformLocation, (float) rgb.getR() / 255, (float) rgb.getG() / 255, (float) rgb.getB() / 255);
+            GL30.glUniform3f(uniformLocation, (float) rgb.getR() / 255, (float) rgb.getG() / 255,
+                    (float) rgb.getB() / 255);
         }
         GL30.glDrawArrays(drawType.getGlEnum(), 0, polygon.getCoordinates().length / dataCountPerCoordinate);
     }

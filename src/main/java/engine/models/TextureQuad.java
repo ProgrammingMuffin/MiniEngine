@@ -19,4 +19,12 @@ public class TextureQuad implements IRenderData {
     public RenderTypeEnum getRenderType() {
         return RenderTypeEnum.TEXTURE_QUAD;
     }
+
+    @Override
+    public Coordinates getCoordinates() {
+        return Coordinates.builder()
+                .x(x)
+                .y(y)
+                .build();
+    }
 }

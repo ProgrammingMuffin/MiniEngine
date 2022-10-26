@@ -4,4 +4,6 @@ package engine.models;
 public interface IRenderData {
 
     RenderTypeEnum getRenderType();
+
+    Coordinates getCoordinates();
 }

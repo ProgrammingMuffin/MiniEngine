@@ -19,4 +19,13 @@ public class GradientQuad implements IRenderData {
     public RenderTypeEnum getRenderType() {
         return RenderTypeEnum.GRADIENT_QUAD;
     }
+
+    @Override
+    public Coordinates getCoordinates() {
+        System.out.println("LOLOL: " + this.x + " and y is: " + this.y);
+        return Coordinates.builder()
+                .x(this.x)
+                .y(this.y)
+                .build();
+    }
 }

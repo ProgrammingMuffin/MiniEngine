@@ -7,11 +7,10 @@ import engine.services.GlService;
 import engine.utils.FileUtil;
 import engine.utils.ShaderUtil;
 
-import java.io.InputStream;
-
 public class RectTextureRenderingStrategy implements IRenderingStrategy {
 
-    public RectTextureRenderingStrategy() {}
+    public RectTextureRenderingStrategy() {
+    }
 
     @Override
     public void execute(IRenderData renderData) {
@@ -19,8 +18,10 @@ public class RectTextureRenderingStrategy implements IRenderingStrategy {
             return;
         }
         TextureQuad textureQuad = (TextureQuad) renderData;
-        int x = textureQuad.x;
-        int y = textureQuad.y;
+        int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
+        int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
+        int x = textureQuad.x - camX;
+        int y = textureQuad.y - camY;
         int width = textureQuad.width;
         int height = textureQuad.height;
         String image = textureQuad.image;

@@ -29,4 +29,5 @@ public class AbstractCamera {
      * Y rotation of the camera viewport
      */
     protected int ry;
+
 }

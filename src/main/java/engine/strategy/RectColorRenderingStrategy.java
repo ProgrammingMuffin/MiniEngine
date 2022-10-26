@@ -21,8 +21,10 @@ public class RectColorRenderingStrategy implements IRenderingStrategy {
             return;
         }
         ColoredQuad coloredQuad = (ColoredQuad) renderData;
-        int x = coloredQuad.x;
-        int y = coloredQuad.y;
+        int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
+        int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
+        int x = coloredQuad.x - camX;
+        int y = coloredQuad.y - camY;
         int width = coloredQuad.width;
         int height = coloredQuad.height;
         RGBWrapper rgb = coloredQuad.rgb;

@@ -8,15 +8,16 @@ import engine.utils.ShaderUtil;
 
 public class RectGradientRenderingStrategy implements IRenderingStrategy {
 
-
     @Override
     public void execute(IRenderData renderData) {
         if (!RenderTypeEnum.GRADIENT_QUAD.equals(renderData.getRenderType())) {
             return;
         }
         GradientQuad gradientQuad = (GradientQuad) renderData;
-        int x = gradientQuad.x;
-        int y = gradientQuad.y;
+        int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
+        int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
+        int x = gradientQuad.x - camX;
+        int y = gradientQuad.y - camY;
         int width = gradientQuad.width;
         int height = gradientQuad.height;
         RGBWrapper rgb = gradientQuad.rgb;

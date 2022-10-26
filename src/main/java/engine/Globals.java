@@ -1,5 +1,6 @@
 package engine;
 
+import engine.eventHandlers.KeyPressEventHandler;
 import engine.models.AbstractCamera;
 import engine.models.BufferEnum;
 
@@ -20,4 +21,6 @@ public class Globals {
     public static Map<String, Integer> textureMap = new HashMap<>();
 
     public static AbstractCamera camera;
+
+    public static KeyPressEventHandler keyPressEventHandler = new KeyPressEventHandler();
 }

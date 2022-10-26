@@ -13,7 +13,7 @@ public class Init {
 
     public static long window;
 
-    public static void init () {
+    public static void init() {
         GLFW.glfwInit();
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_DEBUG_CONTEXT, GL30.GL_TRUE);
         window = GLFW.glfwCreateWindow(Globals.screenWidth, Globals.screenHeight, "hello world!", 0, 0);
@@ -21,7 +21,7 @@ public class Init {
         GLFW.glfwMakeContextCurrent(window);
         GLFW.glfwShowWindow(window);
         GL.createCapabilities();
-        GLUtil.setupDebugMessageCallback();
+        // GLUtil.setupDebugMessageCallback();
         initVertexBufferObjects();
     }
 
