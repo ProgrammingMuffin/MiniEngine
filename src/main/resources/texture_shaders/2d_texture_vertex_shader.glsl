@@ -1,3 +1,4 @@
+#version 400
 attribute vec2 vertexCoord;
 attribute vec2 textureCoord;
 

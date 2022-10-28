@@ -1,3 +1,4 @@
+#version 400
 varying vec2 outTextureCoord;
 uniform sampler2D tex;
 

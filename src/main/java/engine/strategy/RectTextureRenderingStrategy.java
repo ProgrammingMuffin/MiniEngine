@@ -1,7 +1,6 @@
 package engine.strategy;
 
 import engine.Globals;
-import engine.Renderer;
 import engine.models.*;
 import engine.services.GlService;
 import engine.utils.FileUtil;
@@ -20,8 +19,8 @@ public class RectTextureRenderingStrategy implements IRenderingStrategy {
         TextureQuad textureQuad = (TextureQuad) renderData;
         int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
         int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
-        int x = textureQuad.x - camX;
-        int y = textureQuad.y - camY;
+        int x = textureQuad.x;
+        int y = textureQuad.y;
         int width = textureQuad.width;
         int height = textureQuad.height;
         String image = textureQuad.image;

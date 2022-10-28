@@ -12,21 +12,10 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <lwjgl.version>3.3.1</lwjgl.version>
+        <lwjgl.natives>natives-linux</lwjgl.natives>
     </properties>
 
     <profiles>
-        <profile>
-            <id>lwjgl-natives-linux-amd64</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
-            <properties>
-                <lwjgl.natives>natives-linux</lwjgl.natives>
-            </properties>
-        </profile>
         <profile>
             <id>lwjgl-natives-linux-aarch64</id>
             <activation>
@@ -135,6 +124,19 @@
             </activation>
             <properties>
                 <lwjgl.natives>natives-windows-arm64</lwjgl.natives>
+            </properties>
+        </profile>
+        <profile>
+            <id>lwjgl-natives-linux-amd64</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <os>
+                    <family>unix</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <lwjgl.natives>natives-linux</lwjgl.natives>
             </properties>
         </profile>
     </profiles>
