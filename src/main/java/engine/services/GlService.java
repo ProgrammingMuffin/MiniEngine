@@ -42,8 +42,10 @@ public class GlService {
             Integer texId = Globals.textureMap.get(polygon.getTextureFileName());
             GL30.glActiveTexture(GL30.GL_TEXTURE0);
             GL30.glBindTexture(GL30.GL_TEXTURE_2D, texId);
-            BufferedImage image = getImage(polygon.getTextureFileName());
-            ByteBuffer imageData = getImageBytes(image);
+            if (Globals.assetCache.get(polygon.getAssetId()) == null) {
+                AssetService.loadAsset(polygon.getTextureFileName(), polygon.getAssetId(), null);
+            }
+            ByteBuffer imageData = Globals.assetCache.get(polygon.getAssetId());
             GL30.glTexParameteri(GL30.GL_TEXTURE_2D, GL30.GL_TEXTURE_MIN_FILTER, GL30.GL_LINEAR);
             GL30.glTexParameteri(GL30.GL_TEXTURE_2D, GL30.GL_TEXTURE_MAG_FILTER, GL30.GL_LINEAR);
             GL30.glTexImage2D(GL30.GL_TEXTURE_2D, 0, GL30.GL_RGBA, image.getWidth(), image.getHeight(),
@@ -66,31 +68,5 @@ public class GlService {
     public static void resetRenderingContext() {
         GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, 0);
         GL30.glBindVertexArray(0);
-    }
-
-    private static BufferedImage getImage(String imageFileName) {
-        BufferedImage image;
-        try {
-            image = ImageIO.read(Objects.requireNonNull(GlService.class.getClassLoader()
-                    .getResourceAsStream(imageFileName)));
-            return image;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static ByteBuffer getImageBytes(BufferedImage image) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(width * height * 4);
-        int[] rgbArray = new int[width * height];
-        image.getRGB(0, 0, width, height, rgbArray, 0, width);
-        for (int rgb : rgbArray) {
-            byteBuffer.put((byte) ((rgb >> 16) & 0xFF));
-            byteBuffer.put((byte) ((rgb >> 8) & 0xFF));
-            byteBuffer.put((byte) (rgb & 0x0000FF));
-            byteBuffer.put((byte) 0xFF);
-        }
-        return byteBuffer;
     }
 }

@@ -1,15 +1,12 @@
 package engine.strategy;
 
 import engine.Globals;
-import engine.Renderer;
 import engine.models.*;
 import engine.services.GlService;
 import engine.utils.FileUtil;
 import engine.utils.ShaderUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.InputStream;
 
 @Data
 @NoArgsConstructor

@@ -4,7 +4,6 @@ import engine.utils.ShaderUtil;
 import lombok.Data;
 import org.lwjgl.opengl.GL30;
 
-import java.io.File;
 import java.io.InputStream;
 
 /**

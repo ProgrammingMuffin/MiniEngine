@@ -11,5 +11,7 @@ public class Polygon {
 
     private String textureFileName;
 
+    private String assetId;
+
     private RGBWrapper rgb;
 }
