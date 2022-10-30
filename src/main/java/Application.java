@@ -30,7 +30,6 @@ public class Application {
             if (running.get() == false) {
                 break;
             }
-            break;
         }
     }
 

@@ -18,12 +18,12 @@ public class AssetService {
      * bytebuffer onto globals. Post processing can be null, in which case that will
      * be ignored
      */
-    public static void loadAsset(String imageFileName, String assetId, IPerPixelProcessing postProcessing) {
-        ByteBuffer byteBuffer = getImageBytesProcessed(getImage(imageFileName), postProcessing);
+    public static void loadAsset(BufferedImage image, String assetId, IPerPixelProcessing postProcessing) {
+        ByteBuffer byteBuffer = getImageBytesProcessed(image, postProcessing);
         Globals.assetCache.putIfAbsent(assetId, byteBuffer);
     }
 
-    private static BufferedImage getImage(String imageFileName) {
+    public static BufferedImage getImage(String imageFileName) {
         BufferedImage image;
         try {
             image = ImageIO.read(Objects.requireNonNull(GlService.class.getClassLoader()

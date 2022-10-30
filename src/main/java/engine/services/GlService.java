@@ -42,8 +42,9 @@ public class GlService {
             Integer texId = Globals.textureMap.get(polygon.getTextureFileName());
             GL30.glActiveTexture(GL30.GL_TEXTURE0);
             GL30.glBindTexture(GL30.GL_TEXTURE_2D, texId);
+            BufferedImage image = AssetService.getImage(polygon.getTextureFileName());
             if (Globals.assetCache.get(polygon.getAssetId()) == null) {
-                AssetService.loadAsset(polygon.getTextureFileName(), polygon.getAssetId(), null);
+                AssetService.loadAsset(image, polygon.getAssetId(), null);
             }
             ByteBuffer imageData = Globals.assetCache.get(polygon.getAssetId());
             GL30.glTexParameteri(GL30.GL_TEXTURE_2D, GL30.GL_TEXTURE_MIN_FILTER, GL30.GL_LINEAR);
