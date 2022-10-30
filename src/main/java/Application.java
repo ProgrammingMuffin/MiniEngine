@@ -6,11 +6,8 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL30;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.awt.*;
 
 public class Application {
 
