@@ -50,6 +50,8 @@ public class RectTextureRenderingStrategy implements IRenderingStrategy {
         polygon.setCoordinates(coordinates);
         polygon.setTextureCoordinates(textureCoordinates);
         polygon.setTextureFileName(image);
+        polygon.setPerPixelProcessing(textureQuad.perPixelProcessing);
+        polygon.setAssetId(textureQuad.assetId);
         GlService.renderObject(BufferEnum.SCENE_BUFFER, DrawTypeEnum.QUADS, polygon, 2, shaderProgram);
         GlService.resetRenderingContext();
     }

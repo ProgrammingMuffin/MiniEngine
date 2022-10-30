@@ -21,7 +21,7 @@ public class Init {
         GLFW.glfwMakeContextCurrent(window);
         GLFW.glfwShowWindow(window);
         GL.createCapabilities();
-        GLUtil.setupDebugMessageCallback();
+        // GLUtil.setupDebugMessageCallback();
         initVertexBufferObjects();
     }
 

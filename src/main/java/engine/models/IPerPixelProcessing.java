@@ -4,5 +4,5 @@ import java.nio.ByteBuffer;
 
 public interface IPerPixelProcessing {
 
-    void process(ByteBuffer byteBuffer, int pixelRow, int pixelCol, int r, int g, int b, int a);
+    void process(ByteBuffer byteBuffer, int pixelRow, int pixelCol, byte r, byte g, byte b, byte a);
 }

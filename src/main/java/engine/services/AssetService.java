@@ -40,17 +40,25 @@ public class AssetService {
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(width * height * 4);
         int[] rgbArray = new int[width * height];
         image.getRGB(0, 0, width, height, rgbArray, 0, width);
-        int row = 1;
-        int col = 1;
+        /*
+         * x,y = y*width + x;
+         */
+        int x = 0;
+        int y = 0;
         for (int rgb : rgbArray) {
             byte r = (byte) ((rgb >> 16) & 0xFF);
             byte g = (byte) ((rgb >> 8) & 0xFF);
             byte b = (byte) (rgb & 0x0000FF);
             byte a = (byte) (0xFF);
             if (postProcessing != null) {
-                postProcessing.process(byteBuffer, row, col, r, g, b, a);
+                postProcessing.process(byteBuffer, x, y, r, g, b, a);
             } else {
                 byteBuffer.put(r).put(g).put(b).put(a);
+            }
+            x++;
+            if (x >= width) {
+                x = 0;
+                y++;
             }
         }
         return byteBuffer;

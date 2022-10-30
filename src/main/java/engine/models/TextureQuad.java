@@ -15,6 +15,10 @@ public class TextureQuad implements IRenderData {
 
     public String image;
 
+    public String assetId;
+
+    public IPerPixelProcessing perPixelProcessing;
+
     @Override
     public RenderTypeEnum getRenderType() {
         return RenderTypeEnum.TEXTURE_QUAD;

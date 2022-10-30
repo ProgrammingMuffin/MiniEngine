@@ -13,5 +13,7 @@ public class Polygon {
 
     private String assetId;
 
+    private IPerPixelProcessing perPixelProcessing;
+
     private RGBWrapper rgb;
 }
