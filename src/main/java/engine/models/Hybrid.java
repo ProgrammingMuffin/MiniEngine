@@ -1,9 +1,11 @@
 package engine.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
 public class Hybrid implements IRenderData {
@@ -21,7 +23,8 @@ public class Hybrid implements IRenderData {
     // This is of the form <z-index/level, the object to render>
     // Things inside renderables will have a positioning relative to the hybrid's
     // position
-    public final HashMap<Integer, ArrayList<IRenderData>> renderables = new HashMap<>();
+    @Getter
+    private final Map<Integer, ArrayList<IRenderData>> renderables = new TreeMap<>();
 
     @Override
     public RenderTypeEnum getRenderType() {
@@ -30,8 +33,11 @@ public class Hybrid implements IRenderData {
 
     @Override
     public Coordinates getCoordinates() {
-        // TODO Auto-generated method stub
         return null;
     }
 
+    public void addComponent(int level, IRenderData component) {
+        this.renderables.putIfAbsent(level, new ArrayList<>());
+        this.renderables.get(level).add(component);
+    }
 }

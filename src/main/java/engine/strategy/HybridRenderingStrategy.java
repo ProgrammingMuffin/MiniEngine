@@ -1,7 +1,8 @@
 package engine.strategy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import engine.models.Hybrid;
 import engine.models.IRenderData;
@@ -18,8 +19,8 @@ public class HybridRenderingStrategy implements IRenderingStrategy {
             return;
         }
         Hybrid hybrid = (Hybrid) renderData;
-        HashMap<Integer, ArrayList<IRenderData>> renderables = (hybrid.renderables == null) ? new HashMap<>()
-                : hybrid.renderables;
+        Map<Integer, ArrayList<IRenderData>> renderables = (hybrid.getRenderables() == null) ? new TreeMap<>()
+                : hybrid.getRenderables();
         for (Integer level : renderables.keySet()) {
             for (IRenderData component : renderables.get(level)) {
                 component.getRenderType().getRenderingStrategy().execute(component);
