@@ -14,4 +14,6 @@ public interface Scene {
     public void render();
 
     public void update();
+
+    public void clear();
 }
