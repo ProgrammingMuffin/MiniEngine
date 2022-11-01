@@ -14,10 +14,17 @@ public class RectGradientRenderingStrategy implements IRenderingStrategy {
             return;
         }
         GradientQuad gradientQuad = (GradientQuad) renderData;
+        int x = gradientQuad.x;
+        int y = gradientQuad.y;
+        Coordinates relPos = renderData.getRelativeCoordinates();
+        if (relPos != null) {
+            x += relPos.x;
+            y += relPos.y;
+        }
         int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
         int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
-        int x = gradientQuad.x - camX;
-        int y = gradientQuad.y - camY;
+        x = x - camX;
+        y = y - camY;
         int width = gradientQuad.width;
         int height = gradientQuad.height;
         RGBWrapper rgb = gradientQuad.rgb;

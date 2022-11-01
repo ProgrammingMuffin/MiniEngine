@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Builder
-public class Hybrid implements IRenderData {
+public class Hybrid extends AbstractRenderData {
 
     public int x;
 

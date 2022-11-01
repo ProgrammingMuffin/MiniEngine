@@ -3,7 +3,7 @@ package engine.models;
 import lombok.Builder;
 
 @Builder
-public class ColoredQuad implements IRenderData {
+public class ColoredQuad extends AbstractRenderData {
 
     public int x;
 

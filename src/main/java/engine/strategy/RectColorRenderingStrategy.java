@@ -18,10 +18,17 @@ public class RectColorRenderingStrategy implements IRenderingStrategy {
             return;
         }
         ColoredQuad coloredQuad = (ColoredQuad) renderData;
+        int x = coloredQuad.x;
+        int y = coloredQuad.y;
+        Coordinates relPos = renderData.getRelativeCoordinates();
+        if (relPos != null) {
+            x += relPos.x;
+            y += relPos.y;
+        }
         int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
         int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
-        int x = coloredQuad.x - camX;
-        int y = coloredQuad.y - camY;
+        x = x - camX;
+        y = y - camY;
         int width = coloredQuad.width;
         int height = coloredQuad.height;
         RGBWrapper rgb = coloredQuad.rgb;

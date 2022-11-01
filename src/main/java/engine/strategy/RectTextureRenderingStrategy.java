@@ -17,10 +17,17 @@ public class RectTextureRenderingStrategy implements IRenderingStrategy {
             return;
         }
         TextureQuad textureQuad = (TextureQuad) renderData;
-        int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
-        int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
         int x = textureQuad.x;
         int y = textureQuad.y;
+        Coordinates relPos = renderData.getRelativeCoordinates();
+        if (relPos != null) {
+            x += relPos.x;
+            y += relPos.y;
+        }
+        int camX = (Globals.camera == null ? 0 : Globals.camera.getX());
+        int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
+        x = x - camX;
+        y = y - camY;
         int width = textureQuad.width;
         int height = textureQuad.height;
         String image = textureQuad.image;
