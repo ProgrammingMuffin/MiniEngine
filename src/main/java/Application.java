@@ -16,6 +16,8 @@ public class Application {
         System.out.println("Running game");
         Init.init();
         ArrayList<IRenderData> coloredRectangles = new ArrayList<>();
+        coloredRectangles.add(TextureQuad.builder().x(0).y(0).width(200).height(200).assetId("something")
+                .image("coffee.png").build());
         AtomicInteger frames = new AtomicInteger(0);
         while (running.get()) {
             if (frames.get() == 0 || frames.get() == 1) {
