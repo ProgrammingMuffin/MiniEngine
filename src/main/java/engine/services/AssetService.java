@@ -9,7 +9,9 @@ import engine.Globals;
 import engine.models.IPerPixelProcessing;
 
 import java.awt.image.BufferedImage;
+import java.awt.Color;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class AssetService {
 
@@ -23,11 +25,10 @@ public class AssetService {
         Globals.assetCache.putIfAbsent(assetId, byteBuffer);
     }
 
-    public static BufferedImage getImage(String imageFileName) {
+    public static BufferedImage getImage(InputStream imageStream) {
         BufferedImage image;
         try {
-            image = ImageIO.read(Objects.requireNonNull(GlService.class.getClassLoader()
-                    .getResourceAsStream(imageFileName)));
+            image = ImageIO.read(Objects.requireNonNull(imageStream));
             return image;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -46,10 +47,11 @@ public class AssetService {
         int x = 0;
         int y = 0;
         for (int rgb : rgbArray) {
-            byte r = (byte) ((rgb >> 16) & 0xFF);
-            byte g = (byte) ((rgb >> 8) & 0xFF);
-            byte b = (byte) (rgb & 0x0000FF);
-            byte a = (byte) (0xFF);
+            Color color = new Color(rgb, true);
+            byte a = (byte) color.getAlpha();
+            byte r = (byte) color.getRed();
+            byte g = (byte) color.getGreen();
+            byte b = (byte) color.getBlue();
             if (postProcessing != null) {
                 postProcessing.process(byteBuffer, x, y, r, g, b, a);
             } else {

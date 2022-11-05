@@ -14,6 +14,8 @@ public class Globals {
 
     public static int screenHeight = 480;
 
+    public static boolean fullscreen = false;
+
     public static Map<BufferEnum, Integer> bufferMap = new HashMap<>();
 
     public static Map<BufferEnum, Integer> arrayMap = new HashMap<>();

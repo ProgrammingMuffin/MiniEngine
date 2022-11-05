@@ -1,3 +1,4 @@
+import engine.Globals;
 import engine.Init;
 import engine.models.*;
 import engine.services.StatService;
@@ -16,8 +17,13 @@ public class Application {
         System.out.println("Running game");
         Init.init();
         ArrayList<IRenderData> coloredRectangles = new ArrayList<>();
+        coloredRectangles.add(ColoredQuad.builder().x(-Globals.screenWidth).y(-Globals.screenHeight)
+                .width(2 * Globals.screenWidth).height(2 * Globals.screenHeight).rgb(new RGBWrapper(125, 0, 180))
+                .build());
         coloredRectangles.add(TextureQuad.builder().x(0).y(0).width(200).height(200).assetId("something")
-                .image("coffee.png").build());
+                .image("coffee.png")
+                .loadAsset(Application.class.getClassLoader().getResourceAsStream("coffee.png"))
+                .build());
         AtomicInteger frames = new AtomicInteger(0);
         while (running.get()) {
             if (frames.get() == 0 || frames.get() == 1) {

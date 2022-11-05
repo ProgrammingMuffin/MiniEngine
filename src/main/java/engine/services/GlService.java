@@ -1,22 +1,16 @@
 package engine.services;
 
-import engine.Globals;
-import engine.models.*;
-import engine.models.Polygon;
-import org.lwjgl.opengl.GL11;
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
+
 import org.lwjgl.opengl.GL30;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Objects;
-
-import static java.sql.Types.FLOAT;
+import engine.Globals;
+import engine.models.BufferEnum;
+import engine.models.DrawTypeEnum;
+import engine.models.Polygon;
+import engine.models.RGBWrapper;
+import engine.models.ShaderProgram;
 
 public class GlService {
 
@@ -35,6 +29,8 @@ public class GlService {
                 GL30.GL_FLOAT, false,
                 Float.BYTES * dataCountPerCoordinate, 0);
         if (polygon.getTextureCoordinates() != null && polygon.getTextureCoordinates().length > 0) {
+            GL30.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
+            GL30.glEnable(GL30.GL_BLEND);
             GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, Globals.bufferMap.get(BufferEnum.TEXTURE_BUFFER));
             if (Globals.textureMap.get(polygon.getTextureFileName()) == null) {
                 Globals.textureMap.put(polygon.getTextureFileName(), GL30.glGenTextures());
@@ -42,7 +38,7 @@ public class GlService {
             Integer texId = Globals.textureMap.get(polygon.getTextureFileName());
             GL30.glActiveTexture(GL30.GL_TEXTURE0);
             GL30.glBindTexture(GL30.GL_TEXTURE_2D, texId);
-            BufferedImage image = AssetService.getImage(polygon.getTextureFileName());
+            BufferedImage image = polygon.getTextureFile();
             if (Globals.assetCache.get(polygon.getAssetId()) == null) {
                 AssetService.loadAsset(image, polygon.getAssetId(), polygon.getPerPixelProcessing());
             }
