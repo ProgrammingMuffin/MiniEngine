@@ -19,6 +19,14 @@ public class RectTextureRenderingStrategy implements IRenderingStrategy {
         TextureQuad textureQuad = (TextureQuad) renderData;
         int x = textureQuad.x;
         int y = textureQuad.y;
+        int width = textureQuad.width;
+        int height = textureQuad.height;
+        if (textureQuad.dynamicPosition) {
+            x = (textureQuad.dynX != null) ? textureQuad.dynX.get() : x;
+            y = (textureQuad.dynY != null) ? textureQuad.dynY.get() : y;
+            width = (textureQuad.dynWidth != null) ? textureQuad.dynWidth.get() : width;
+            height = (textureQuad.dynHeight != null) ? textureQuad.dynHeight.get() : height;
+        }
         Coordinates relPos = renderData.getRelativeCoordinates();
         if (relPos != null) {
             x += relPos.x;
@@ -28,8 +36,6 @@ public class RectTextureRenderingStrategy implements IRenderingStrategy {
         int camY = (Globals.camera == null ? 0 : Globals.camera.getY());
         x = x - camX;
         y = y - camY;
-        int width = textureQuad.width;
-        int height = textureQuad.height;
         String image = textureQuad.image;
         float[] coordinates = {
                 (float) x / Globals.screenWidth, (float) y / Globals.screenHeight,

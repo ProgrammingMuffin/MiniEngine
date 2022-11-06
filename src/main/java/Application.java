@@ -2,6 +2,7 @@ import engine.Globals;
 import engine.Init;
 import engine.models.*;
 import engine.services.StatService;
+import engine.utils.AwtUtil;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL30;
@@ -20,9 +21,8 @@ public class Application {
         coloredRectangles.add(ColoredQuad.builder().x(-Globals.screenWidth).y(-Globals.screenHeight)
                 .width(2 * Globals.screenWidth).height(2 * Globals.screenHeight).rgb(new RGBWrapper(125, 0, 180))
                 .build());
-        coloredRectangles.add(TextureQuad.builder().x(0).y(0).width(200).height(200).assetId("something")
-                .image("coffee.png")
-                .loadAsset(Application.class.getClassLoader().getResourceAsStream("coffee.png"))
+        coloredRectangles.add(TextureQuad.builder().x(0).y(0).width(400).height(100).assetId("something")
+                .loadAsset(AwtUtil.createText("New Game", 0, 50, 400, 100, 50.0f))
                 .build());
         AtomicInteger frames = new AtomicInteger(0);
         while (running.get()) {

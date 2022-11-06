@@ -1,5 +1,7 @@
 package engine.models;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

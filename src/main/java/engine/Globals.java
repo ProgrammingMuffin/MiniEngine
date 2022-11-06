@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Globals {
 
-    public static int screenWidth = 640;
+    public static int screenWidth = 1024;
 
-    public static int screenHeight = 480;
+    public static int screenHeight = 768;
 
     public static boolean fullscreen = false;
 

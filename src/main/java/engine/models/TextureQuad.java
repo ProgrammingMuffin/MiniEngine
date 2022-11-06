@@ -1,6 +1,7 @@
 package engine.models;
 
 import java.io.InputStream;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.services.AssetService;
 import lombok.Builder;
@@ -16,6 +17,16 @@ public class TextureQuad extends AbstractRenderData {
     public int width;
 
     public int height;
+
+    public AtomicInteger dynX;
+
+    public AtomicInteger dynY;
+
+    public AtomicInteger dynWidth;
+
+    public AtomicInteger dynHeight;
+
+    public boolean dynamicPosition;
 
     public BufferedImage imageFile;
 
@@ -42,6 +53,11 @@ public class TextureQuad extends AbstractRenderData {
 
         public TextureQuadBuilder loadAsset(InputStream imageFile) {
             this.imageFile = AssetService.getImage(imageFile);
+            return this;
+        }
+
+        public TextureQuadBuilder loadAsset(BufferedImage bufferedImage) {
+            this.imageFile = bufferedImage;
             return this;
         }
     }

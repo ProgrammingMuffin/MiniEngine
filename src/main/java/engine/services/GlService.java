@@ -56,8 +56,8 @@ public class GlService {
         } else if (polygon.getRgb() != null) {
             int uniformLocation = GL30.glGetUniformLocation(program, "colors");
             RGBWrapper rgb = polygon.getRgb();
-            GL30.glUniform3f(uniformLocation, (float) rgb.getR() / 255, (float) rgb.getG() / 255,
-                    (float) rgb.getB() / 255);
+            GL30.glUniform4f(uniformLocation, (float) rgb.getR() / 255, (float) rgb.getG() / 255,
+                    (float) rgb.getB() / 255, (float) rgb.getA() / 255);
         }
         GL30.glDrawArrays(drawType.getGlEnum(), 0, polygon.getCoordinates().length / dataCountPerCoordinate);
     }
