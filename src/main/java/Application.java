@@ -3,6 +3,7 @@ import engine.Init;
 import engine.models.*;
 import engine.services.StatService;
 import engine.utils.AwtUtil;
+import engine.utils.FileUtil;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL30;
@@ -22,7 +23,8 @@ public class Application {
                 .width(2 * Globals.screenWidth).height(2 * Globals.screenHeight).rgb(new RGBWrapper(125, 0, 180))
                 .build());
         coloredRectangles.add(TextureQuad.builder().x(0).y(0).width(400).height(100).assetId("something")
-                .loadAsset(AwtUtil.createText("New Game", 0, 50, 400, 100, 50.0f))
+                .loadAsset(AwtUtil.createText("New Game", 0, 50, 400, 100, FileUtil.getFile("fonts/FiraCode.ttf"),
+                        50.0f, RGBWrapper.of(255, 255, 255)))
                 .build());
         AtomicInteger frames = new AtomicInteger(0);
         while (running.get()) {
