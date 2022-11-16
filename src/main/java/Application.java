@@ -23,10 +23,11 @@ public class Application {
         coloredRectangles.add(ColoredPolygon.builder().addPoint(100, 200).addPoint(-100, 50).addPoint(50, -200)
                 .addPoint(200, 200).addPoint(100, 200).rgb(RGBWrapper.of(255, 255, 255)).dynamic(false).build());
         coloredRectangles.add(TexturePolygon.builder()
-                .addPoint(0, 500)
-                .addPoint(500, 500)
-                .addPoint(500, 0)
-                .addPoint(0, 0)
+                .addPoint(new AtomicInteger(0), new AtomicInteger(500))
+                .addPoint(new AtomicInteger(500), new AtomicInteger(500))
+                .addPoint(new AtomicInteger(500), new AtomicInteger(0))
+                .addPoint(new AtomicInteger(0), new AtomicInteger(0))
+                .dynamic(true)
                 .assetId("doge")
                 .loadAsset(AssetService.getImage(Application.class.getClassLoader().getResourceAsStream("doge.jpg")))
                 .build());

@@ -1,5 +1,7 @@
 package engine.strategy;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.lwjgl.assimp.AIImporterDesc.Buffer;
 
 import engine.models.IRenderData;
@@ -32,18 +34,18 @@ public class PolygonTextureRenderingStrategy implements IRenderingStrategy {
         float[] coordinates = new float[polygons];
         for (int i = 0; i < polygons; i += 2) {
             if (texturePoly.isDynamic()) {
-                coordinates[i] = texturePoly.dynPoints.get(i).get() / Globals.screenWidth;
-                coordinates[i + 1] = texturePoly.dynPoints.get(i + 1).get() / Globals.screenHeight;
+                coordinates[i] = (float) texturePoly.dynPoints.get(i).get() / Globals.screenWidth;
+                coordinates[i + 1] = (float) texturePoly.dynPoints.get(i + 1).get() / Globals.screenHeight;
             } else {
                 coordinates[i] = (float) texturePoly.points.get(i) / Globals.screenWidth;
                 coordinates[i + 1] = (float) texturePoly.points.get(i + 1) / Globals.screenHeight;
             }
         }
         float[] textureCoordinates = {
+                0f, 0f,
                 0f, 1f,
                 1f, 1f,
-                1f, 0f,
-                0f, 0f
+                1f, 0f
         };
         ShaderProgram shaderProgram;
         if (ShaderUtil.shaderMap.get("2d_texture_shader") == null) {

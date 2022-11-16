@@ -48,6 +48,15 @@ public class TexturePolygon extends AbstractRenderData {
             return this;
         }
 
+        public TexturePolygonBuilder addPoint(AtomicInteger x, AtomicInteger y) {
+            if (this.dynPoints == null) {
+                this.dynPoints = new ArrayList<>();
+            }
+            this.dynPoints.add(x);
+            this.dynPoints.add(y);
+            return this;
+        }
+
         public TexturePolygonBuilder loadAsset(InputStream imageFile) {
             this.imageFile = AssetService.getImage(imageFile);
             return this;
