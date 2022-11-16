@@ -1,6 +1,7 @@
 import engine.Globals;
 import engine.Init;
 import engine.models.*;
+import engine.services.AssetService;
 import engine.services.StatService;
 import engine.utils.AwtUtil;
 import engine.utils.FileUtil;
@@ -19,11 +20,16 @@ public class Application {
         System.out.println("Running game");
         Init.init();
         ArrayList<IRenderData> coloredRectangles = new ArrayList<>();
-        coloredRectangles.add(ColoredQuad.builder().x(-Globals.screenWidth).y(-Globals.screenHeight)
-                .width(2 * Globals.screenWidth).height(2 * Globals.screenHeight).rgb(new RGBWrapper(125, 0, 180))
-                .build());
         coloredRectangles.add(ColoredPolygon.builder().addPoint(100, 200).addPoint(-100, 50).addPoint(50, -200)
                 .addPoint(200, 200).addPoint(100, 200).rgb(RGBWrapper.of(255, 255, 255)).dynamic(false).build());
+        coloredRectangles.add(TexturePolygon.builder()
+                .addPoint(0, 500)
+                .addPoint(500, 500)
+                .addPoint(500, 0)
+                .addPoint(0, 0)
+                .assetId("doge")
+                .loadAsset(AssetService.getImage(Application.class.getClassLoader().getResourceAsStream("doge.jpg")))
+                .build());
         AtomicInteger frames = new AtomicInteger(0);
         while (running.get()) {
             if (frames.get() == 0 || frames.get() == 1) {
