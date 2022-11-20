@@ -42,9 +42,9 @@ public class PolygonTextureRenderingStrategy implements IRenderingStrategy {
             }
         }
         float[] textureCoordinates = {
-                0f, 0f,
-                0f, 1f,
                 1f, 1f,
+                0f, 1f,
+                0f, 0f,
                 1f, 0f
         };
         ShaderProgram shaderProgram;
