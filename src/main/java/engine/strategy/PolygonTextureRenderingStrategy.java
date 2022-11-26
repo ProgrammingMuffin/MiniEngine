@@ -34,11 +34,11 @@ public class PolygonTextureRenderingStrategy implements IRenderingStrategy {
         float[] coordinates = new float[polygons];
         for (int i = 0; i < polygons; i += 2) {
             if (texturePoly.isDynamic()) {
-                coordinates[i] = (float) texturePoly.dynPoints.get(i).get() / Globals.screenWidth;
-                coordinates[i + 1] = (float) texturePoly.dynPoints.get(i + 1).get() / Globals.screenHeight;
+                coordinates[i] = (float) (texturePoly.dynPoints.get(i).get() - camX) / Globals.screenWidth;
+                coordinates[i + 1] = (float) (texturePoly.dynPoints.get(i + 1).get() - camY) / Globals.screenHeight;
             } else {
-                coordinates[i] = (float) texturePoly.points.get(i) / Globals.screenWidth;
-                coordinates[i + 1] = (float) texturePoly.points.get(i + 1) / Globals.screenHeight;
+                coordinates[i] = (float) (texturePoly.points.get(i) - camX) / Globals.screenWidth;
+                coordinates[i + 1] = (float) (texturePoly.points.get(i + 1) - camY) / Globals.screenHeight;
             }
         }
         float[] textureCoordinates = {

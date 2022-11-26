@@ -25,7 +25,10 @@ public class ColoredPolygon extends AbstractRenderData {
 
     @Override
     public Coordinates getCoordinates() {
-        return null;
+    	Coordinates coords = new Coordinates();
+    	coords.x = dynamic ? this.dynPoints.get(0).get() : this.points.get(0);
+    	coords.y = dynamic ? this.dynPoints.get(1).get() : this.points.get(1);
+        return coords;
     }
 
     public static class ColoredPolygonBuilder {

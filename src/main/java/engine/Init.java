@@ -17,7 +17,7 @@ public class Init {
         GLFW.glfwInit();
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_DEBUG_CONTEXT, GL30.GL_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL30.GL_FALSE);
-        window = GLFW.glfwCreateWindow(Globals.screenWidth, Globals.screenHeight, "hello world!",
+        window = GLFW.glfwCreateWindow(Globals.screenWidth, Globals.screenHeight, Globals.windowTitle,
                 Globals.fullscreen ? GLFW.glfwGetPrimaryMonitor() : 0, 0);
         GLFW.glfwDefaultWindowHints();
         GLFW.glfwMakeContextCurrent(window);

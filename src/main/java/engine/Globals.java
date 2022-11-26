@@ -3,6 +3,7 @@ package engine;
 import engine.eventHandlers.KeyPressEventHandler;
 import engine.models.AbstractCamera;
 import engine.models.BufferEnum;
+import engine.services.SceneManager;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -28,4 +29,8 @@ public class Globals {
     public static KeyPressEventHandler keyPressEventHandler = new KeyPressEventHandler();
 
     public static HashMap<String, ByteBuffer> assetCache = new HashMap<>();
+    
+    public static String windowTitle = "Hello World!";
+    
+    public static SceneManager sceneManager;
 }

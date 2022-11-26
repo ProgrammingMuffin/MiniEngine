@@ -31,11 +31,11 @@ public class PolygonColorRenderingStrategy implements IRenderingStrategy {
         float[] coordinates = new float[polygons];
         for (int i = 0; i < polygons; i += 2) {
             if (coloredPoly.isDynamic()) {
-                coordinates[i] = coloredPoly.dynPoints.get(i).get() / Globals.screenWidth;
-                coordinates[i + 1] = coloredPoly.dynPoints.get(i + 1).get() / Globals.screenHeight;
+                coordinates[i] = (float) (coloredPoly.dynPoints.get(i).get() - camX) / Globals.screenWidth;
+                coordinates[i + 1] = (float) (coloredPoly.dynPoints.get(i + 1).get() - camY) / Globals.screenHeight;
             } else {
-                coordinates[i] = (float) coloredPoly.points.get(i) / Globals.screenWidth;
-                coordinates[i + 1] = (float) coloredPoly.points.get(i + 1) / Globals.screenHeight;
+                coordinates[i] = (float) (coloredPoly.points.get(i) - camX) / Globals.screenWidth;
+                coordinates[i + 1] = (float) (coloredPoly.points.get(i + 1) - camY) / Globals.screenHeight;
             }
         }
         ShaderProgram shaderProgram;
